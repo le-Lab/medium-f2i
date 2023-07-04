@@ -2,6 +2,7 @@ const {
   create,
   comments,
   applaud,
+  showArticle,
 } = require("../controllers/articleController");
 const Article = require("../models/articleModel");
 
@@ -10,6 +11,7 @@ const router = require("express").Router();
 router.get("/create", (req, res) => {
   res.render("create");
 });
+router.get('/:id/show', showArticle)
 router.post("/create", create);
 router.get("/:id/comments", async (req, res) => {
   try {

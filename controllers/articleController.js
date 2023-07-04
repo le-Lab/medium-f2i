@@ -13,6 +13,15 @@ const create = async (req, res) => {
       .json({ error: `Erreur lors de la sauvegarde de l'article` });
   }
 };
+const showArticle = async (req, res) => {
+  const { id } = req.params.id;
+  try {
+    const article = await Article.findOne(id);
+    res.status(200).render("show", { article: article });
+  } catch (error) {
+    res.json({ message: "Article non trouvé" });
+  }
+};
 const comments = async (req, res) => {
   try {
     const { id } = req.params;
@@ -52,4 +61,4 @@ const applaud = async (req, res) => {
       .json({ error: `Erreur lors de l'ajoout d'applaudissements` });
   }
 };
-module.exports = { create, comments, applaud };
+module.exports = { create, comments, applaud, showArticle };
